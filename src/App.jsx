@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Header from "./components/Header";
 import Button from "./components/Button";
+import { formatearDinero } from './helpers'
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
     const valor = cantidad - STEP;
     setCantidad( valor );
     if ( valor < MIN ) {
-      alert( 'Cantidad NO válida' );
+      // alert( 'Cantidad NO válida' );
       setCantidad( MIN );
       return;
     }
@@ -28,7 +29,7 @@ function App() {
     const valor = cantidad + STEP;
     setCantidad( valor );
     if ( valor > MAX ) {
-      alert( 'Cantidad NO válida' );
+      // alert( 'Cantidad NO válida' );
       setCantidad( MAX );
       return;
     }
@@ -47,9 +48,7 @@ function App() {
         <Button
           operador='+'
           fn={handleClickIncremento}
-
         />
-
       </div>
 
       <input
@@ -63,7 +62,7 @@ function App() {
       />
 
       <p className='text-center my-10 text-5xl font-extrabold text-indigo-600'>
-        {cantidad}
+        {formatearDinero( cantidad )}
       </p>
     </div>
   )
