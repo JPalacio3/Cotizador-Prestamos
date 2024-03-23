@@ -4,15 +4,24 @@ import Button from "./components/Button";
 import { formatearDinero, calcularTotalPagar } from './helpers'
 
 function App() {
-
+  // States
   const [ cantidad, setCantidad ] = useState( 10000 );
   const [ meses, setMeses ] = useState( 12 );
   const [ total, setTotal ] = useState( 0 );
+  const [ pago, setPago ] = useState( 0 );
 
+  // Escucha por cantidad y meses
   useEffect( () => {
     const resultadoTotalPagar = calcularTotalPagar( cantidad, meses );
     setTotal( resultadoTotalPagar );
   }, [ cantidad, meses ] );
+
+  // Escucha por el total a pagar mensual
+  useEffect( () => {
+    // Calcular el pago mensual
+    setPago( total / meses );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ total ] );
 
   const MIN = 1000;
   const MAX = 20000;
@@ -91,8 +100,7 @@ function App() {
         </h2>
         <p className="text-xl text-gray-500 text-center font-bold">{meses} Meses</p>
         <p className="text-xl text-gray-500 text-center font-bold">Total a Pagar {formatearDinero( total )}</p>
-        <p className="text-xl text-gray-500 text-center font-bold">Mensuales</p>
-
+        <p className="text-xl text-gray-500 text-center font-bold"> {formatearDinero( pago )} Mensuales</p>
       </div>
     </div >
   )

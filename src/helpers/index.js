@@ -31,11 +31,9 @@ const calcularTotalPagar = ( cantidad, plazo ) => {
     } else {
         total *= 1.3;
     }
+
     return total;
 }
-
-
-
 
 export {
     formatearDinero,
